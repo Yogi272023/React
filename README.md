@@ -180,7 +180,11 @@ list.filter()
 - Normal JS utility function: present inside react package (main 2 hooks)
 [imported as named import]
 useState():- In this we provide function as second argument it is a trigger to render react component.[We do array destructuring when we create state variable.]
-useEffect()
+Modification is done first and then whole component is rendered again with updated values. So when it will run , it would run with updated value instead of default value that's why we can say const is used without any error as for const type of variable we can't change value once it is set. But here we are replacing and running from start. So value is not changed in between.
+useEffect():- It is called once component is rendered.(useEffect is called after rendering is done)
+// if no dependency array==> useEffect is called on every render.
+// if dependency array is empty ([]) ==> useEffect is called on initial render(just once).
+// if dependency array is [btnName]==> useEffect is called every time btnName is updated.
 
 
 #                        Efficient DOM manipulation
@@ -190,3 +194,25 @@ useEffect()
 then it will update the actual DOM on every render cycle.
 # Finding difference b/w 2 html is slow as compared to 2 objects in JS. 
 # That's why React is faster.
+
+
+# Monolith (all services in one place) & Microservices (breaking services according to single responsibility)
+
+# Loads==> Render UI==> API call==> Re-Render UI (This approach is used in react)
+
+# fetch() function is given by browser.JS engine give this to us. It return promise so to resolve it we use async-await.
+
+# cross-origin: origin mismatch then it will show an error.
+
+# Shimmer UI:- We load fake page until we get actual data from API.[show fake cards]
+
+# Whenever state variables update, react triggers a reconciliation cycle (rerenders the component)
+
+
+# Rules of hook:
+1. Used inside functional component
+2. Created at top of the component
+3. Not to be used inside condition(if) and loop
+
+
+# react-router-dom: helps to create routes in our app.
