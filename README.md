@@ -104,7 +104,7 @@ React functional Component ==> It is normal JS function which returns some JSX
  We can call it as <Title/> or another way is {Title()}.
  If we want to use any JS code inside jsx then we can pass it inside curly braces {}.
 
- # Component= just normal JS function
+ # Component= just normal JS function. To create this shortcut is rafc.
 
  # Props (properties)= just normal arguments for a function
  Passing props to a component is same as passing argument to a function.
@@ -216,3 +216,64 @@ then it will update the actual DOM on every render cycle.
 
 
 # react-router-dom: helps to create routes in our app.
+# createBrowserRouter- it is a function that takes list of paths. To tell BrowserRouter what gona happen if we take this path then which component to be shown.It will just create the routing configuration.
+# RouterProvider- To pass this configuration (appRouter) to our app we need to use RouterProvider.
+root.render(<RouterProvider router={appRouter}/>);==> This is the way we provide appRouter to whole app.
+
+
+# useRouteError hook--> It is used to tell more details about an error.
+const err = useRouteError();
+
+# Children Routes for AppLayout: Suppose we want our heading and footer constant and only the content in between i.e. body to be changed on click of nav-item then we have to use concept of children routes. In this we inside routing configuration we have to pass children (key) details, it is a list (array) of paths. Earlier we passed /about and /contact path outside but now we will pass the same detail inside this chidren key inside an array. Due to which "/" it will be root Route and others (/about, /contact) will be children for this route. 
+
+# Now we will render the children accordingly in AppLayout component. To show the corresponding component.(push the children according to the routes.)We will use Outlet.
+# Pass this Outlet component given by react-router-dom library to AppLayout where we want to show UI according to change in the path.
+# Whenever the path is changed then this Outlet will be filled with the corresponding component and that will be shown in the UI.
+# Browser doesn't know about this Outlet and other components.
+
+# In React we can navigate to new page without reloading the whole page.(If we use <a> tag then we will navigate to new page but it will reload the whole page.). So we will use Link component which is provided by react-router-dom. It works exactly same as anchor tag. In case of a tag we use href but for Link we will use to. If we check in the browser it will show a tag only. So we can say when we use Link it is basically wrapping <a> so that it can take track of every movement.
+
+# That's why react is single page application as we are not reloading just replacing the components in a single page. Earlier we have different html pages and it will shown accordingly.
+
+# 2 types of routing in web apps- 
+  - client side routing: when we load the app for first time it will just load component in the app. Because all the components are already loaded in the app. So we don't need to make api calls.That's why it is a single page application.(single page just component getting interchanged via client side routing). So we use this in the react.
+  - server side routing: we are making a call and page (like about.html ) is coming from server.
+
+# resId is dynamic can changed according to the restaurant--> Dynamic routing
+
+
+# resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[2]?.card?.card ?? resInfo?.cards[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards[1]?.card?.card ;==========> In this I got an error of undefined map on itemCards this is due to it is returning null/undefined value so I checked it, in that I found data for some cards at index 1 whereas for some other at index 2 so I have used ?? this, it will check first left side expression if it is null or undefined then it will go to right side epression.
+
+
+
+# Class Based Component==> It is plain JS class.So class is basically have render method which returns a piece of JSX.
+# Never update state variable directly.
+# this.setState({})--> React gives you this function where you can write updated value for all state variables.
+# first constructor is called and then render is called for class component.
+# constructor--> render(is completed)--> componentDidMount (to make api calls)
+# this.timer=setInterval() suppose we used this in componentDidMount then we have to clear it or else it can blow up our site as we move to another component then also this timer continuer this is drawback of single page application. So we have to clear it in componentWillUnmount. clearInterval(this.timer).
+-In this when we move to different component timer will be cleared and componentWillUnmount will be printed in console.
+
+
+# For functional component we can do unmount in useEffect() by using==> return()=>{
+   clearInterval(timer);
+}
+
+# In case of sibling for a parent then order of execution will be:
+# Parent constructor==> child 1 constructor==>child1 render==>child 2 constructor==>child2 render==> child1 componentDidMount==>child2 componentDidMount==>Parent componentDidMount
+- React does optimization (React lifecycle diagram)==>React works in 2 phases
+1. Render phase (constructor + render)
+2. Commit phase (react updates the DOM then componentDidMount is called)
+-React will patch the render phase for all siblings, so for all children first constructor+render is called and then later componentDidMount is called for all children.
+Patching of render phase and commit phase is done. Because DOM manipulation is most expensive operation so for all children render is done and then DOM is updated once.
+
+
+# debugger;==>We can use this to debug. Put debugger where ever you want to debug.
+
+# Online event listener to check if we are online or offline.
+
+# Chunking/ Code Splitting/ Dynamic Bundling/ Lazy loading/ on demand loading/dynamic import==>Logic separation of bundle (small app inside big app).In this code for particular part will not be there initially but only once we visit that component then only that component code will come.
+# lazy() function is given by react, will take callback function as an argument, in which we use import funtion that take path as an input.
+# const Grocery=lazy(()=>import("/path"))
+# By using lazy for a particular component new bundle is created once we go to that particular component, initially it is not present. So once we go to that component it takes some time to create a bundle and in between this time react didn't find anything so it will show an error.
+# To resolve this issue react provides Suspense component. Just wrap your component with Suspense component. Give it a placeholder (fallback) to show what to be shown in time period till react wait for that bundle to be created.
