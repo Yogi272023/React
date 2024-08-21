@@ -1,4 +1,5 @@
 import React from "react";
+import UserContext from "../utils/UserContext";
 
 class UserClass extends React.Component{
     constructor(props){
@@ -23,6 +24,11 @@ class UserClass extends React.Component{
     
     return(
         <div className="user-card">
+          <div> LoggedInUser: 
+            <UserContext.Consumer>
+              {({loggedInUser})=><h1 className="text-xl font-bold">{loggedInUser}</h1> }
+            </UserContext.Consumer>
+            </div>
           <img src={avatar_url}/>
           <h2> Name: {name}</h2>
           <h3> Address: {location}</h3>

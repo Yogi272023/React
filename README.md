@@ -277,3 +277,22 @@ Patching of render phase and commit phase is done. Because DOM manipulation is m
 # const Grocery=lazy(()=>import("/path"))
 # By using lazy for a particular component new bundle is created once we go to that particular component, initially it is not present. So once we go to that component it takes some time to create a bundle and in between this time react didn't find anything so it will show an error.
 # To resolve this issue react provides Suspense component. Just wrap your component with Suspense component. Give it a placeholder (fallback) to show what to be shown in time period till react wait for that bundle to be created.
+
+
+
+# Tailwind css --> PostCSS package(a tool for transforming CSS with JS.)
+
+
+# Higher order component--> It is just normal JS function that takes component as an argument and enhance it and returns a new component.(called as enhancer)
+
+
+# React Context-> To avoid props drilling(central/ global space from where we can use variable anywhere.)
+
+
+# Redux Toolkit
+  - Install @reduxjs/toolkit and react-redux
+  - Build our store
+  - Connect our store to the app
+  - Create Slice (Cartslice)
+  - dispatch(action)
+  - Selector
